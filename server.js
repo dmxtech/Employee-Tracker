@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
-// const mysql = require('mysql2');
-// const consTable = require('console.table');
-// require('dotenv').config()
+const mysql = require('mysql2');
+const consTable = require('console.table');
+require('dotenv').config()
 
 function Welcomemessage() {
     console.log("._________________________________.")
