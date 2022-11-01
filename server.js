@@ -9,90 +9,153 @@ function Welcomemessage() {
     console.log("|        EMPLOYEE TRACKER         |")
     console.log("|                                 |")
     console.log("._________________________________.")
-    promptUser();
-};
 
 
-
-function promptUser() {
     inquirer.prompt({
         type: 'list',
         message: 'What would you like to do?',
         choices: [
-            'View All Employees',
-            'Add Employee',
-            'Update Employee Role',
-            'View All Roles',
-            'Add Role',
-            'View All Departments',
-            'Add Departments',
-            'Quit'
+            "View All Employees",
+            "Add Employee",
+            "Update Employee Role",
+            "View All Roles",
+            "Add Role",
+            "View All Departments",
+            "Add Departments",
+            "Quit",
         ],
         name: 'indexmenu',
     })
-    inquirer.prompt(answers)
+
         .then(answers => {
-            let menuanswer = (answers.choices);
+            let menuanswer = (answers.indexmenu);
+
             if (menuanswer === "View All Employees") {
                 ViewallEmployees()
 
                 // console.log("team",employeeinfo);
 
             } else if (menuanswer === "Add Employee") {
-                AddEmployee()
+                AddEmployee();
 
             } else if (menuanswer === "Update Employee Role") {
-                UpdateEmployeeRole()
+                UpdateEmployeeRole();
 
             } else if (menuanswer === "View All Roles") {
-                ViewallRoles()
+                ViewallRoles();
 
             } else if (menuanswer === "Add Role") {
-                AddRole()
+                AddRole();
 
             } else if (menuanswer === "View All Departments") {
-                ViewallDepartments()
+                ViewallDepartments();
 
             } else if (menuanswer === "Add Departments") {
-                AddDepartments()
+                AddDepartments();
 
             } else if (menuanswer === "Quit") {
-                Quit()
+                Quit();
 
             }
-        }
-        )
-}
-function ViewallEmployees() {
 
-}
-function AddEmployee() {
+            function ViewallEmployees() {
 
-}
-function UpdateEmployeeRole() {
+            }
 
-}
-function ViewallRoles() {
 
-}
-function AddRole() {
+            function AddEmployee() {
+                let managerArray = [{
+                    name: 'None',
+                    value: 'NULL'
+                }];
 
-}
-function ViewallDepartments() {
+                let roleArray = [];
+                return inquirer.prompt(
+                    [
+                        {
+                            type: 'input',
+                            message: "What is the employee's first name?",
+                            name: 'firstName',
+                        },
+                        {
+                            type: 'input',
+                            message: "What is the employee's last name?",
+                            name: 'lastName',
+                        },
+                        {
+                            type: 'list',
+                            message: "What is the employee's role?",
+                            choices: roleArray,
+                            name: 'employeeRole'
+                        },
+                        {
+                            type: 'list',
+                            message: "Who is the employee's manager?",
+                            choices: managerArray,
+                            name: 'employeeManager'
+                        }
+                    ]
+                )
+            }
 
-}
-function AddDepartments() {
 
-}
-function Quit() {
-    return inquirer.prompt([
-        {
-            type: 'list',
-            name: 'finish',
-            message: 'do you want to quit?',
-            choices: ["Yes", "No"],
-        },
-    ])
 
-}
+            function UpdateEmployeeRole() {
+
+            }
+
+
+            function ViewallRoles() {
+
+            }
+
+
+            function AddRole() {
+                let departmentArray = [];
+                return inquirer.prompt(
+                    [
+                        {
+                            type: 'input',
+                            message: 'What is the name of the role?',
+                            name: 'roleName'
+                        },
+                        {
+                            type: 'input',
+                            message: 'What is the salary of the role?',
+                            name: 'roleSalary'
+                        },
+                        {
+                            type: 'list',
+                            message: 'Which department does the role belong to?',
+                            choices: departmentArray,
+                            name: 'roleDepartment'
+                        }
+                    ]
+                )
+            }
+            function ViewallDepartments() {
+
+            }
+            function AddDepartments() {
+
+                inquirer.prompt({
+                    type: 'input',
+                    message: 'What is the name of the department?',
+                    name: 'departmentName'
+                })
+            }
+            function Quit() {
+                return inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'finish',
+                        message: 'do you want to quit?',
+                        choices: ["Yes", "No"],
+                    },
+                ])
+            }
+
+
+        })
+};
 Welcomemessage()
