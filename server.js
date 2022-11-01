@@ -2,7 +2,16 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const consTable = require('console.table');
 require('dotenv').config()
-
+// Connect to database
+const db = mysql.createConnection(
+    {
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'employee_db'
+    },
+    console.log(`Connected to the employee_db database.`)
+);
 function Welcomemessage() {
     console.log("._________________________________.")
     console.log("|                                 |")
