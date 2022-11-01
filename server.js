@@ -30,7 +30,69 @@ function promptUser() {
         ],
         name: 'indexmenu',
     })
-        .then(answers => { }
+    inquirer.prompt(answers)
+        .then(answers => {
+            let menuanswer = (answers.choices);
+            if (menuanswer === "View All Employees") {
+                ViewallEmployees()
+
+                // console.log("team",employeeinfo);
+
+            } else if (menuanswer === "Add Employee") {
+                AddEmployee()
+
+            } else if (menuanswer === "Update Employee Role") {
+                UpdateEmployeeRole()
+
+            } else if (menuanswer === "View All Roles") {
+                ViewallRoles()
+
+            } else if (menuanswer === "Add Role") {
+                AddRole()
+
+            } else if (menuanswer === "View All Departments") {
+                ViewallDepartments()
+
+            } else if (menuanswer === "Add Departments") {
+                AddDepartments()
+
+            } else if (menuanswer === "Quit") {
+                Quit()
+
+            }
+        }
         )
+}
+function ViewallEmployees() {
+
+}
+function AddEmployee() {
+
+}
+function UpdateEmployeeRole() {
+
+}
+function ViewallRoles() {
+
+}
+function AddRole() {
+
+}
+function ViewallDepartments() {
+
+}
+function AddDepartments() {
+
+}
+function Quit() {
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'finish',
+            message: 'do you want to quit?',
+            choices: ["Yes", "No"],
+        },
+    ])
+
 }
 Welcomemessage()
