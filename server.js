@@ -101,7 +101,25 @@ function Welcomemessage() {
 
 
             function UpdateEmployeeRole() {
+                const employeeArray = [];
+                const roleArray = [];
+                return inquirer.prompt(
+                    [
+                        {
+                            type: 'list',
+                            message: "Which employee's role do you want to update?",
+                            choices: employeeArray,
+                            name: 'employeeUpdate'
 
+                        },
+                        {
+                            type: 'list',
+                            message: 'Which role do you want to assign the selected employee?',
+                            choices: roleArray,
+                            name: 'newRole'
+                        }
+                    ]
+                )
             }
 
 
@@ -159,3 +177,29 @@ function Welcomemessage() {
         })
 };
 Welcomemessage()
+
+
+ // function updateManager() {
+            //     const employeeArray = [];
+            //     const managerArray = [{
+            //         name: 'None',
+            //         value: 'NULL'
+            //     }];
+            //     return inquirer.prompt(
+            //         [
+            //             {
+            //                 type: 'list',
+            //                 message: "Which employee do you want to update?",
+            //                 choices: employeeArray,
+            //                 name: 'employeeUpdate'
+
+            //             },
+            //             {
+            //                 type: 'list',
+            //                 message: 'Which manager do you want to assign to the selected employee?',
+            //                 choices: managerArray,
+            //                 name: 'newManager'
+            //             }
+            //         ]
+            //     )
+            // }
