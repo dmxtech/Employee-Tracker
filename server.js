@@ -125,7 +125,18 @@ function Welcomemessage() {
                             name: 'employeeManager'
                         }
                     ]
-                )
+                ).then(answers => {
+                    const sqlQuery = `
+                    INSERT INTO employees (first_name, last_name, role_id, manager_id) 
+                    VALUES 
+                    ('${answers.firstName}', '${answers.lastName}', ${answers.employeeRole}, ${answers.employeeManager})`;
+
+                    db.query(sqlQuery, function (err, results) {
+                        if (err) throw err;
+                        console.log('New employee added.');
+                        Welcomemessage();
+                    });
+                })
             };
 
 
@@ -165,7 +176,7 @@ function Welcomemessage() {
                 db.query(sqlQuery, function (err, results) {
                     if (err) throw err;
                     console.table(results);
-                    promptUser();
+                    Welcomemessage();
                 });
             };
 
@@ -192,12 +203,20 @@ function Welcomemessage() {
                         }
                     ]
                 )
+                    .then(answers => {
+                        db.query(`INSERT INTO roles (title, salary, department_id) VALUES ('${answers.roleName}', ${answers.roleSalary}, ${answers.roleDepartment})`, function (err, results) {
+                            if (err) throw err;
+                            console.log('New role added.');
+                            Welcomemessage();
+                        });
+                    })
             };
+
             function ViewallDepartments() {
                 db.query(`SELECT * FROM departments`, function (err, results) {
                     if (err) throw err;
                     console.table(results);
-                    promptUser();
+                    Welcomemessage();
                 });
             };
             function AddDepartments() {
@@ -207,6 +226,14 @@ function Welcomemessage() {
                     message: 'What is the name of the department?',
                     name: 'departmentName'
                 })
+                    .then(answers => {
+                        db.query(`INSERT INTO departments (name) VALUES ('${answers.departmentName}');`, function (err, results) {
+                            if (err) throw err;
+                            console.log('New department has been added.');
+                        });
+
+                    })
+                Welcomemessage()
             };
             function Quit() {
                 return inquirer.prompt([
