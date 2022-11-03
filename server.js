@@ -2,16 +2,20 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const consTable = require('console.table');
 require('dotenv').config()
-// Connect to database
+
 const db = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
-        password: '',
+        password: process.env.MYSQL_PASSWORD,
         database: 'employee_db'
     },
     console.log(`Connected to the employee_db database.`)
 );
+db.connect(err => {
+    if (err) throw err;
+
+});
 function Welcomemessage() {
     console.log("._________________________________.")
     console.log("|                                 |")
@@ -68,8 +72,25 @@ function Welcomemessage() {
             }
 
             function ViewallEmployees() {
+                const sqlQuery = `
+                SELECT employees.id, 
+                employees.first_name, 
+                employees.last_name, 
+                roles.title, 
+                departments.name AS department,
+                roles.salary, 
+                CONCAT (manager.first_name, " ", manager.last_name) AS manager
+                FROM employees
+                LEFT JOIN roles ON employees.role_id = roles.id
+                LEFT JOIN departments ON roles.department_id = departments.id
+                LEFT JOIN employees manager ON employees.manager_id = manager.id`;
 
-            }
+                db.query(sqlQuery, function (err, results) {
+                    if (err) throw err;
+                    console.table(results);
+                    Welcomemessage();
+                });
+            };
 
 
             function AddEmployee() {
@@ -105,7 +126,7 @@ function Welcomemessage() {
                         }
                     ]
                 )
-            }
+            };
 
 
 
@@ -129,12 +150,24 @@ function Welcomemessage() {
                         }
                     ]
                 )
-            }
+            };
 
 
             function ViewallRoles() {
+                const sqlQuery = `
+                SELECT roles.id, 
+                roles.title,
+                departments.name AS department,  
+                roles.salary
+                FROM roles
+                LEFT JOIN departments ON roles.department_id = departments.id `;
 
-            }
+                db.query(sqlQuery, function (err, results) {
+                    if (err) throw err;
+                    console.table(results);
+                    promptUser();
+                });
+            };
 
 
             function AddRole() {
@@ -159,10 +192,14 @@ function Welcomemessage() {
                         }
                     ]
                 )
-            }
+            };
             function ViewallDepartments() {
-
-            }
+                db.query(`SELECT * FROM departments`, function (err, results) {
+                    if (err) throw err;
+                    console.table(results);
+                    promptUser();
+                });
+            };
             function AddDepartments() {
 
                 inquirer.prompt({
@@ -170,7 +207,7 @@ function Welcomemessage() {
                     message: 'What is the name of the department?',
                     name: 'departmentName'
                 })
-            }
+            };
             function Quit() {
                 return inquirer.prompt([
                     {
@@ -180,11 +217,12 @@ function Welcomemessage() {
                         choices: ["Yes", "No"],
                     },
                 ])
-            }
+            };
 
 
         })
-};
+
+}
 Welcomemessage()
 
 
