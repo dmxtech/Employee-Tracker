@@ -7,14 +7,15 @@ const db = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
-        password: process.env.MYSQL_PASSWORD,
+        password: process.env.DB_PASSWORD,
         database: 'employee_db'
     },
     console.log(`Connected to the employee_db database.`)
+
 );
 db.connect(err => {
     if (err) throw err;
-    Welcomemessage()
+
 });
 function Welcomemessage() {
     console.log("._________________________________.")
