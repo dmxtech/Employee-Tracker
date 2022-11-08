@@ -208,7 +208,7 @@ function Welcomemessage() {
                             db.query(`UPDATE employees SET role_id = ${answers.newRole} WHERE id = ${answers.employeeUpdate}`, function (err, results) {
                                 if (err) throw err;
                                 console.table('Employee has been updated.');
-                                promptUser();
+                                Welcomemessage();
                             });
                         })
                     })
