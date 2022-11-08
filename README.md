@@ -62,4 +62,4 @@
   dmxtech
 
   
- Svideo of working app: [video](https://drive.google.com/file/d/1RWMhGkCSCr49Z3CNvri7kc_JUmIk8tZN/view).
+ video of working app: [video](https://drive.google.com/file/d/1RWMhGkCSCr49Z3CNvri7kc_JUmIk8tZN/view).
