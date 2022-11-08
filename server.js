@@ -1,12 +1,12 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const consTable = require('console.table');
-require('dotenv').config()
+require('dotenv').config();
 const db = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
-        password: 'Supercampeones18!',
+        password: process.env.DB_PASSWORD,
         database: 'employee_db'
     },
 
@@ -293,10 +293,11 @@ function Welcomemessage() {
                         db.query(`INSERT INTO departments (name) VALUES ('${answers.departmentName}');`, function (err, results) {
                             if (err) throw err;
                             console.log('New department has been added.');
+                            Welcomemessage()
                         });
 
                     })
-                Welcomemessage()
+
             };
             function Quit() {
                 return inquirer.prompt([
