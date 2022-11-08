@@ -2,21 +2,23 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const consTable = require('console.table');
 require('dotenv').config()
-
 const db = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
-        password: process.env.DB_PASSWORD,
+        password: 'Supercampeones18!',
         database: 'employee_db'
     },
+
     console.log(`Connected to the employee_db database.`)
 
 );
 db.connect(err => {
     if (err) throw err;
-
+    console.log("Connected as Id", db.threadId);
+    Welcomemessage()
 });
+
 function Welcomemessage() {
     console.log("._________________________________.")
     console.log("|                                 |")
@@ -308,11 +310,12 @@ function Welcomemessage() {
             };
 
 
-        })
+        });
 
 
-}
-Welcomemessage()
+};
+
+
 
 
  // function updateManager() {
